@@ -1,0 +1,43 @@
+# ─── Ambiente e segredos ───────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.env
+
+# ─── Node / Frontend ───────────────────────────────────────────────
+node_modules/
+.next/
+out/
+dist/
+.turbo/
+*.tsbuildinfo
+.npm
+
+# ─── Java / Maven ──────────────────────────────────────────────────
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ─── IntelliJ IDEA ─────────────────────────────────────────────────
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# ─── VS Code ────────────────────────────────────────────────────────
+.vscode/
+!.vscode/extensions.json
+
+# ─── OS ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ─── Logs ───────────────────────────────────────────────────────────
+*.log
+logs/

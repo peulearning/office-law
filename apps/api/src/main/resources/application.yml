@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: faam-api
+
+  # ─── Banco de dados ──────────────────────────────────────────────
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/faam}
+    username: ${DB_USERNAME:faam_user}
+    password: ${DB_PASSWORD:faam_pass}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate          # Flyway cuida do schema; JPA só valida
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: public
+
+  # ─── Flyway ──────────────────────────────────────────────────────
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  # ─── Upload de arquivos ──────────────────────────────────────────
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 15MB
+
+# ─── Servidor ──────────────────────────────────────────────────────
+server:
+  port: ${SERVER_PORT:8080}
+
+# ─── JWT ───────────────────────────────────────────────────────────
+faam:
+  jwt:
+    secret: ${JWT_SECRET:chave-secreta-dev-minimo-256-bits-aqui-12345}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}   # 24 horas
+
+  # ─── CORS ──────────────────────────────────────────────────────
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:3000}
+
+  # ─── Cloudflare R2 ─────────────────────────────────────────────
+  storage:
+    endpoint: ${R2_ENDPOINT:https://placeholder.r2.cloudflarestorage.com}
+    access-key: ${R2_ACCESS_KEY:access-key-dev}
+    secret-key: ${R2_SECRET_KEY:secret-key-dev}
+    bucket: ${R2_BUCKET:faam-attachments}
+    public-url: ${R2_PUBLIC_URL:https://placeholder.r2.dev}
+
+# ─── Springdoc / Swagger ───────────────────────────────────────────
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+# ─── Logging ───────────────────────────────────────────────────────
+logging:
+  level:
+    br.com.faam: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: INFO
