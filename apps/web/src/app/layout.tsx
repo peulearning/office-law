@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { fontDisplay, fontSans, fontMono } from "../lib/fonts";
+import { fontDisplay, fontSans, fontMono } from "../../lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
